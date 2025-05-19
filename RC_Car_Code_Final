@@ -1,0 +1,75 @@
+double ch1=2;
+int a=5; int b=6;
+int enA=3;
+
+double ch2=4;
+int c=8; int d=9;
+int enB=10;
+
+
+void setup()
+{
+  Serial.begin(9600);
+  
+  pinMode(2,INPUT);
+  pinMode(5,OUTPUT); pinMode(6,OUTPUT);
+  pinMode(3,OUTPUT);
+  
+  pinMode(4,INPUT);
+  pinMode(8,OUTPUT); pinMode(9,OUTPUT);
+  pinMode(10,OUTPUT);
+}
+
+void loop()
+{
+ch1 = pulseIn(2,HIGH);
+ch2 = pulseIn(4,HIGH);
+
+if((ch1==0)&&(ch2==0))
+{     
+ digitalWrite(a,LOW); digitalWrite(b,LOW);
+ digitalWrite(c,LOW);digitalWrite(d,LOW);
+ digitalWrite(enA,HIGH);digitalWrite(enB,HIGH);
+ Serial.println("BOt is ON");
+}
+
+else if((ch1>1530)&&(ch2>1530))
+{     
+digitalWrite(a,HIGH); digitalWrite(b,LOW);
+ digitalWrite(c,LOW);digitalWrite(d,HIGH); 
+ digitalWrite(enA,HIGH);digitalWrite(enB,HIGH); 
+ Serial.println("MOVING FORWARD"); 
+}
+
+else if((ch1>1530)&&(ch2<1460))
+{ 
+  digitalWrite(a,HIGH); digitalWrite(b,LOW);
+ digitalWrite(c,HIGH);digitalWrite(d,LOW);   
+ digitalWrite(enA,HIGH);digitalWrite(enB,HIGH); 
+ Serial.println("c3");
+}
+
+else if((ch1<1460)&&(ch2>1530))
+{     
+  digitalWrite(a,LOW); digitalWrite(b,HIGH);
+ digitalWrite(c,LOW);digitalWrite(d,HIGH);
+ digitalWrite(enA,HIGH);digitalWrite(enB,HIGH);
+ Serial.println("c4");
+}
+
+else if((ch1<1460)&&(ch2<1460))
+{  digitalWrite(a,LOW); digitalWrite(b,HIGH);
+ digitalWrite(c,HIGH);digitalWrite(d,LOW);
+ digitalWrite(enA,HIGH);digitalWrite(enB,HIGH);
+ Serial.println("MOVING BACKWARD");
+}
+
+else
+{     
+ digitalWrite(a,LOW); digitalWrite(b,LOW);
+ digitalWrite(c,LOW);digitalWrite(d,LOW);
+ digitalWrite(enA,LOW);digitalWrite(enA,LOW);
+ Serial.println("c6");
+}
+
+}
